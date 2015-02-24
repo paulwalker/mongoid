@@ -455,7 +455,9 @@ module Mongoid
         generated_methods.module_eval do
           re_define_method("#{meth}?") do
             attr = read_attribute(name)
-            attr == true || attr.present?
+            silence_warnings do
+              attr == true || attr.present?
+            end
           end
         end
       end
